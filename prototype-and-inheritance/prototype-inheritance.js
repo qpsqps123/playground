@@ -7,9 +7,16 @@ function Car(name, type) {
 }
 
 let SM5 = new Car('SM5', 'Sedan');
-SM5.drive();
+
 Car.prototype.horn = function(){
     alert(`Boooom!`);
 }
-SM5.horn();
-console.log(SM5);
+
+function ElectronicCar() {
+    this.engineType = "electrocity";
+}
+
+ElectronicCar.prototype = new Car;
+
+let teslaModel3 = new ElectronicCar();
+
