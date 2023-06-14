@@ -67,8 +67,63 @@ function draw() {
     ctx.lineTo(120, 200);
     ctx.arcTo(170, 200, 170, 250, 50);
     ctx.lineTo(170, 300);
-
     ctx.stroke();
+
+    // 이차 & 삼차 베지어 곡선 연습 - 말풍선 만들기
+    ctx.beginPath();
+    ctx.moveTo(500, 200);
+    ctx.quadraticCurveTo(450, 200, 450, 250);
+    ctx.quadraticCurveTo(450, 300, 500, 300);
+    ctx.lineTo(550, 300);
+    ctx.bezierCurveTo(540, 320, 530, 325, 520, 330);
+    ctx.bezierCurveTo(550, 330, 575, 315, 580, 300);
+    ctx.quadraticCurveTo(630, 300, 630, 250);
+    ctx.quadraticCurveTo(630, 200, 580, 200);
+    ctx.lineTo(500, 200);
+    ctx.stroke();
+
+    // 글씨 쓰기
+    // H
+    ctx.beginPath();
+    ctx.moveTo(500, 240);
+    ctx.lineTo(500, 260);
+    ctx.moveTo(500, 250);
+    ctx.lineTo(515, 250);
+    ctx.moveTo(515, 240);
+    ctx.lineTo(515, 260);
+
+    // E
+    ctx.moveTo(530, 240);
+    ctx.lineTo(545, 240);
+    ctx.moveTo(530, 260);
+    ctx.lineTo(530, 240);
+    ctx.moveTo(530, 250);
+    ctx.lineTo(545, 250);
+    ctx.moveTo(530, 260);
+    ctx.lineTo(545, 260);
+
+    // Y
+    ctx.moveTo(560, 240);
+    ctx.lineTo(567, 250);
+    ctx.moveTo(574, 240);
+    ctx.lineTo(567, 250);
+    ctx.moveTo(567, 250);
+    ctx.lineTo(567, 260);
+    ctx.stroke();
+
+    // 느낌표 윗부분
+    ctx.moveTo(590, 240);
+    ctx.lineTo(598, 240);
+    ctx.lineTo(596, 255);
+    ctx.lineTo(592, 255);
+    ctx.fill();
+
+    // 느낌표 밑부분
+    ctx.moveTo(592, 256);
+    ctx.lineTo(596, 256);
+    ctx.lineTo(596, 260);
+    ctx.lineTo(592, 260);
+    ctx.fill();
   } else {
     unsupportedBrowser.style.display = "block";
   }
