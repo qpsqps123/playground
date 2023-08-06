@@ -1,10 +1,15 @@
+@font-face {
+  font-family: "stf-v0n-braun";
+  src: url(../../fonts/stf-v0n-braun.otf/stf-v0n-braun.otf) format(opentype);
+}
+
 html,
 body {
   height: 100%;
   margin: 0;
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
+  flex-flow: column nowrap;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -36,15 +41,28 @@ body {
   box-shadow: 2px 2px 4px hsl(0, 0%, 10%);
 }
 
+/* 
+.calculator::before {
+  position: absolute;
+  top: 44px;
+  display: block;
+  width: 295px;
+  height: 5px;
+  background-color: hsla(0, 0%, 100%, 1 );
+  content: "";
+} */
+
 .brandName {
   margin: 0 auto 0 50px;
   text-transform: uppercase;
   color: white;
-  font-size: 16px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-family: "stf-v0n-braun", sans-serif;
 }
 
 .brandName > span {
-  font-size: 30px;
+  font-size: 16px;
 }
 
 .display {
@@ -62,7 +80,27 @@ body {
   border-bottom: 20px solid hsl(230, 25%, 20%);
   border-left: 8px solid hsl(230, 25%, 8%);
   font-size: 30px;
-  overflow: hidden;
+  /* overflow: hidden; */
+}
+
+.display::before {
+  content: "";
+  position: absolute;
+  width: 212px;
+  height: 1px;
+  display: block;
+  bottom: 57px;
+  background-color: hsla(0, 0%, 60%, 0.3);
+}
+
+.display::after {
+  content: "";
+  position: absolute;
+  width: 212px;
+  height: 1px;
+  display: block;
+  top: 70px;
+  background-color: hsla(0, 0%, 60%, 0.3);
 }
 
 .displayValue {
@@ -74,18 +112,7 @@ body {
   text-align: end;
   line-height: 1.1;
   padding-right: 3px;
-  /* padding: 3px; */
 }
-
-/* .display::after {
-  display: block;
-  position: absolute;
-  width: 180px;
-  height: 40px;
-  border: 10px solid hsl(0, 0%, 25%);
-  border-radius: 10px;
-  content: "";
-} */
 
 .keyboardLayout {
   display: grid;
@@ -130,4 +157,18 @@ body {
 
 .number:active {
   border: 1px outset hsla(0, 0%, 60%, 0.1);
+}
+
+.footer {
+  font-size: 12px;
+  color: hsl(120, 2%, 57%);
+}
+
+.footer > p > a {
+  color: black;
+  text-decoration: none;
+}
+
+.footer > p > a:hover {
+  text-decoration-line: underline;
 }

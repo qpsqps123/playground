@@ -4,17 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style/style.css" />
-    <script src="script/script.js" defer></script>
+    <script type="module" src="script/main.js"></script>
     <title>Braun Calculator</title>
   </head>
   <body>
     <h1 class="a11yHidden">Braun Calculator</h1>
-    <div class="calculator">
+    <section class="calculator">
       <h2 class="brandName" aria-label="brand name">br<span>a</span>un</h2>
-      <section class="display" aria-label="display">
+      <div class="display" aria-label="display">
         <div class="displayValue" aria-label="displayValue">0</div>
-      </section>
-      <section class="keyboardLayout" aria-label="keyboard">
+      </div>
+      <div class="keyboardLayout" aria-label="keyboard">
         <button type="button" class="operator clear">C</button>
         <button type="button" class="operator percent">%</button>
         <button type="button" class="operator radical">√</button>
@@ -35,7 +35,31 @@
         <button type="button" class="number point">.</button>
         <button type="button" class="operator result">=</button>
         <button type="button" class="operator addition">+</button>
-      </section>
-    </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <p>
+        This 'Braun Calculator' project by
+        <a href="#" target="_blank" rel="noopener noreferrer">Jake Jeong</a>
+        is licensed under CC BY 4.0
+      </p>
+      <p>
+        The font
+        <a
+          href="https://fontstruct.com/fontstructions/show/1556788/stf-v0n-braun#comments"
+          target="_blank"
+          rel="noopener noreferrer"
+          >'STF_V0N BRAUN'</a
+        >
+        by
+        <a
+          href="https://fontstruct.com/fontstructors/1502220/sed4tives"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Sed4tives</a
+        >
+        is licensed under CC BY NC ND 3.0
+      </p>
+    </footer>
   </body>
 </html>
