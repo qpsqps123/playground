@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Infinite Scroll</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+      }
+
+      .content {
+        height: 100vh;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+        font-size: 40px;
+      }
+
+      .visible {
+        background: #000;
+        color: #fff;
+      }
+
+      .infiniteBg {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 320px));
+        gap: 30px;
+        margin: 20px;
+      }
+
+      .item {
+        width: 100%;
+        height: 250px;
+        background: blanchedalmond;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="content1" class="content">콘텐츠</div>
+    <div id="content2" class="content">콘텐츠</div>
+    <div id="content3" class="content">콘텐츠</div>
+    <div id="content4" class="content">콘텐츠</div>
+    <div id="content5" class="content">콘텐츠</div>
+    <div>
+      <div>목록</div>
+      <div id="infiniteBg" class="infiniteBg"></div>
+      <div id="renderingFire"></div>
+    </div>
+    <script>
+      /* 교차 관찰자(IntersectionObserver) API 예시 */
+
+      const observerA = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            } else {
+              entry.target.classList.remove("visible");
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+
+      const $list = document.querySelectorAll(".content");
+
+      $list.forEach((el) => observerA.observe(el));
+
+      /* 무한 스크롤 */
+
+      const $infiniteBg = document.querySelector("#infiniteBg");
+      const $renderingFire = document.querySelector("#renderingFire");
+
+      let _limit = 25;
+      let _renderedCount = 1;
+
+      /* 무한 스크롤을 위한 데이터 생성 */
+
+      const title = [];
+
+      for (let i = 1; i < 101; i++) {
+        title.push(`콘텐츠 ${i}`);
+      }
+
+      /* 요소 생성 함수 */
+
+      function createELement(tagName, textContent) {
+        if (tagName) {
+          const _newElement = document.createElement(tagName);
+
+          if (textContent) {
+            const _newContent = document.createTextNode(textContent);
+
+            _newElement.appendChild(_newContent);
+          }
+
+          return _newElement;
+        } else {
+          throw new Error("유효하지 않은 인자 값입니다.");
+        }
+      }
+
+      /* 요소 생성 */
+
+      const newList = title.map((el) => {
+        const _list = createELement("li", el);
+        _list.classList.add("item");
+
+        return _list;
+      });
+
+      /* 무한 스크롤을 적용. 타켓 요소에 닿았을 때 생성된 요소 넣기(렌더링)*/
+      // 본 작업에서는 데이터를 필요한 만큼만 잘라서 가져와서 성능 및 비용 문제 발생을 방지하자.
+      const observerB = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          newList.forEach((el, idx) => {
+            if (
+              idx >= (_renderedCount - 1) * _limit &&
+              idx < _renderedCount * _limit
+            ) {
+              $infiniteBg.insertAdjacentElement("beforeend", el);
+            }
+          });
+
+          _renderedCount++;
+        }
+      });
+
+      observerB.observe($renderingFire);
+    </script>
+  </body>
+</html>
