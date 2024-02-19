@@ -1,0 +1,7 @@
+#tutorial {
+  border: 1px solid black;
+}
+
+#unsupportedBrowser {
+  display: none;
+}

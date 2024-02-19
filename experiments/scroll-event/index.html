@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>scroll event</title>
+    <style>
+      .content {
+        height: 100vh;
+      }
+
+      .even {
+        background: #000;
+        color: #fff;
+      }
+
+      #content1 {
+        position: absolute;
+        top: 0px;
+        z-index: 10;
+        background-color: skyblue;
+        width: 200px;
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="content1" class="content">콘텐츠1</div>
+    <div class="content even">콘텐츠2</div>
+    <div class="content">콘텐츠3</div>
+    <div class="content even">콘텐츠4</div>
+    <div class="content">콘텐츠5</div>
+    <div class="content even">콘텐츠6</div>
+    <script>
+      let lastKnownScrollPostion = 0;
+      let ticking = false;
+
+      const $content1 = document.querySelector("#content1");
+
+      function doSomething(scrollPos) {
+        $content1.style.top = `${scrollPos}px`;
+        if (scrollPos > 500) {
+          console.log("scroll is over 500");
+        }
+      }
+
+      window.addEventListener("scroll", function () {
+        lastKnownScrollPostion = window.scrollY;
+
+        if (!ticking) {
+          window.requestAnimationFrame((timestamp) => {
+            doSomething(lastKnownScrollPostion);
+            ticking = true;
+            console.log("timestamp = " + timestamp);
+          });
+        }
+        ticking = false;
+      });
+    </script>
+  </body>
+</html>
